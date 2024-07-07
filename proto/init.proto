@@ -1,0 +1,24 @@
+// proto/init.proto
+// protoc -I proto proto/init.proto --go_out=./internal/gen/ --go_opt=paths=source_relative --go-grpc_out=./internal/gen/ --go-grpc_opt=paths=source_relative
+// Версия ProtoBuf
+syntax = "proto3";
+
+package init;
+
+// Настройки для генерации Go кода.
+option go_package = "atm_point.init.v1;initv1";
+
+// Auth is service for managing permissions and roles.
+service InitService {
+  // Список операторов доставки
+  rpc Init (InitRequest) returns (InitResponse);
+}
+
+message InitRequest {
+  string sec = 1; // Код устройства.
+}
+
+message InitResponse {
+  uint64 id = 1; // ID постамата
+}
+

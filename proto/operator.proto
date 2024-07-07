@@ -1,0 +1,31 @@
+// proto/operator.proto
+// protoc -I proto proto/operator.proto --go_out=./internal/gen/ --go_opt=paths=source_relative --go-grpc_out=./internal/gen/ --go-grpc_opt=paths=source_relative
+// Версия ProtoBuf
+syntax = "proto3";
+
+package operator;
+
+// Настройки для генерации Go кода.
+option go_package = "atm_point.operator.v1;operatorv1";
+
+// Auth is service for managing permissions and roles.
+service OperatorService {
+  // Список операторов доставки
+  rpc List (ListRequest) returns (ListResponse);
+}
+
+message ListRequest {
+  string sec = 1; // Код устройства.
+}
+
+message ListResponse {
+  repeated Operator records = 1; // Список операторов
+}
+
+message Operator {
+  uint64 id = 1; // ID оператора
+  string name = 2; // Имя оператора
+  string img = 3; // Ссылка на картинку
+}
+
+
